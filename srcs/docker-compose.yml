@@ -1,0 +1,26 @@
+name: inception
+
+networks:
+    inception:
+        driver: bridge
+
+services:
+    mysql:
+        image:
+        container_name: mariadb
+        build: requirements/mariadb
+        volumes:
+            - mariadb:/var/lib/mysql
+        env_file:
+            - .env
+        restart: unless-stopped
+        expose:
+            - 3306
+
+volumes:
+    mariadb:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: ../volumes/mariadb
