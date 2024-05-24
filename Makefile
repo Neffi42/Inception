@@ -1,9 +1,16 @@
-NAME = Inception
+all : up
 
-all: $(NAME)
+up :
+	@docker-compose -f ./srcs/docker-compose.yml up -d
 
-$(NAME):
-	docker compose -f srcs/docker-compose.yml up
+down :
+	@docker-compose -f ./srcs/docker-compose.yml down
 
-down:
-	docker compose down --volumes
+stop :
+	@docker-compose -f ./srcs/docker-compose.yml stop
+
+start :
+	@docker-compose -f ./srcs/docker-compose.yml start
+
+status :
+	@docker ps
