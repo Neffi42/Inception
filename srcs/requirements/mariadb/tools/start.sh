@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p /var/run/mysqld && chown -R mysql:mysql /var/run/mysqld && chmod 777 /var/run/mysqld
+
 service mysql start
 
 echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;" > init.sql
