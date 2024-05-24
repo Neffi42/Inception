@@ -6,6 +6,9 @@ up :
 down :
 	@docker-compose -f ./srcs/docker-compose.yml down
 
+vdown :
+	@docker-compose -f ./srcs/docker-compose.yml down --volumes
+
 stop :
 	@docker-compose -f ./srcs/docker-compose.yml stop
 
