@@ -4,7 +4,8 @@ RUN apt update && apt upgrade -y && apt install -y \
     php7.4 \
     php-fpm \
     php-mysql \
-    wget
+    wget \
+    sendmail
 RUN apt clean
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
@@ -17,7 +18,5 @@ RUN mkdir /run/php
 
 COPY ./tools/start.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start.sh
-
-EXPOSE 9000
 
 CMD [ "/usr/local/bin/start.sh" ]
