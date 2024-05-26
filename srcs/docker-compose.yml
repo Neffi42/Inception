@@ -1,45 +1,47 @@
 services:
-    nginx:
-        container_name: nginx
-        build: requirements/nginx
-        env_file: .env
-        ports:
-            - "443:443"
-        volumes:
-            - wordpress:/var/www/wordpress
-        networks:
-            - inception
-        restart: on-failure
-
-    mariadb:
-        container_name: mariadb
-        build: requirements/mariadb
-        env_file: .env
-        volumes:
-            - mariadb:/var/lib/mysql
-        networks:
-            - inception
-        restart: unless-stopped
-        expose:
-            - 3306
+    # mariadb:
+    #     container_name: mariadb
+    #     build: requirements/mariadb
+    #     env_file:
+    #         - .env
+    #     volumes:
+    #         - mariadb:/var/lib/mysql
+    #     networks:
+    #         - inception
+    #     restart: unless-stopped
 
     wordpress:
         container_name: wordpress
         build: requirements/wordpress
-        env_file: .env
-        depends_on:
-            - mariadb
+        env_file:
+                - .env
+        # depends_on:
+        #     - mariadb
         volumes:
-        - wordpress:/var/www/wordpress
-        networks:
-            - inception
-        restart: on-failure
-        expose:
-            - 9000
+        - wordpress:/var/www/html
+        # networks:
+        #     - inception
+        restart: unless-stopped
 
-networks:
-    inception:
-        driver: bridge
+    nginx:
+        container_name: nginx
+        build: requirements/nginx
+        env_file:
+            - .env
+        depends_on:
+            - wordpress
+        ports:
+            # - 443:443
+            - 80:80
+        volumes:
+            - wordpress:/var/www/html
+        # networks:
+        #     - inception
+        restart: unless-stopped
+
+# networks:
+#     inception:
+#         driver: bridge
 
 volumes:
     wordpress:
@@ -47,10 +49,10 @@ volumes:
         driver_opts:
             type: 'none'
             o: 'bind'
-            device: '~/Inception/srcs/volumes/wordpress'
+            device: './volumes/wordpress'
     mariadb:
         driver: local
         driver_opts:
             type: 'none'
             o: 'bind'
-            device: '~/Inception/srcs/volumes/mariadb'
+            device: './volumes/mariadb'

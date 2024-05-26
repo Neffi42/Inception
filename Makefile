@@ -5,7 +5,7 @@ YELLOW = \033[1;33m
 BLUE = \033[1;34m
 RESET = \033[0m
 
-all: volumes build up
+all: build up
 
 ls:
 	@echo "$(GREEN)██████████████████████████ IMAGES ███████████████████████████$(RESET)"
@@ -13,7 +13,7 @@ ls:
 	@echo "$(YELLOW)██████████████████████ ALL CONTAINERS ███████████████████████$(RESET)"
 	@docker ps -a
 
-build:
+build: volumes
 	@echo "$(BLUE)██████████████████████ Building Images ███████████████████████$(RESET)"
 	docker-compose -f ./srcs/docker-compose.yml build
 
@@ -27,12 +27,12 @@ up:
 
 logs:
 	@echo "$(GREEN)██████████████████████ Running Containers ██████████████████████$(RESET)"
-	docker-compose -f ./srcs/docker-compose.yml logs
+	@docker-compose -f ./srcs/docker-compose.yml logs
 
 
 status:
 	@echo "$(GREEN)██████████████████████ The Running Containers ██████████████████████$(RESET)"
-	docker ps
+	@docker ps
 
 
 stop:

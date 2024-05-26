@@ -1,10 +1,11 @@
 FROM debian:bullseye
 
 RUN apt update && apt upgrade -y && apt install -y \
-    nginx \
-    openssl
+    nginx
+    # \
+    # openssl
 RUN apt clean
 
-COPY ./tools/start.sh .
+COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
-CMD [ "./start.sh" ]
+CMD [ "nginx", "-g", "daemon off;" ]
