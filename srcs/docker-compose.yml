@@ -19,8 +19,8 @@ services:
         #     - mariadb
         volumes:
         - wordpress:/var/www/html
-        # networks:
-        #     - inception
+        networks:
+            - inception
         restart: unless-stopped
 
     nginx:
@@ -28,20 +28,17 @@ services:
         build: requirements/nginx
         env_file:
             - .env
-        depends_on:
-            - wordpress
         ports:
-            # - 443:443
-            - 80:80
+            - 443:443
         volumes:
             - wordpress:/var/www/html
-        # networks:
-        #     - inception
+        networks:
+            - inception
         restart: unless-stopped
 
-# networks:
-#     inception:
-#         driver: bridge
+networks:
+    inception:
+        driver: bridge
 
 volumes:
     wordpress:

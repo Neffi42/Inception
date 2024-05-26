@@ -55,6 +55,7 @@ rm: rvolumes down
 
 rvolumes:
 	@echo "$(RED)█████████████████████ Deleting volumes ██████████████████████$(RESET)"
+	docker volume rm $(docker volume ls -q)
 	sudo rm -rf $(VOLUMES)
 
 volumes:
