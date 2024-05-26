@@ -4,6 +4,7 @@ init_file = /etc/mysql/init.sql
 [mysqld]
 datadir = /var/lib/mysql
 socket = /var/lib/mysql/mysql.sock
-bind_address = mariadb
+bind_address = 0.0.0.0
 port = 3306
+skip-networking = false
 user = mysql

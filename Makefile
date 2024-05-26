@@ -45,7 +45,7 @@ start:
 
 down:
 	@echo "$(RED)██████████████████ Removing All Containers ██████████████████$(RESET)"
-	docker-compose -f ./srcs/docker-compose.yml down
+	docker-compose -f ./srcs/docker-compose.yml down --volumes
 
 reload: down rvolumes build up
 
@@ -55,7 +55,6 @@ rm: rvolumes down
 
 rvolumes:
 	@echo "$(RED)█████████████████████ Deleting volumes ██████████████████████$(RESET)"
-	docker volume rm $(docker volume ls -q)
 	sudo rm -rf $(VOLUMES)
 
 volumes:

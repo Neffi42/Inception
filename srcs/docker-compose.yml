@@ -1,22 +1,22 @@
 services:
-    # mariadb:
-    #     container_name: mariadb
-    #     build: requirements/mariadb
-    #     env_file:
-    #         - .env
-    #     volumes:
-    #         - mariadb:/var/lib/mysql
-    #     networks:
-    #         - inception
-    #     restart: unless-stopped
+    mariadb:
+        container_name: mariadb
+        build: requirements/mariadb
+        env_file:
+            - .env
+        volumes:
+            - mariadb:/var/lib/mysql
+        networks:
+            - inception
+        restart: unless-stopped
 
     wordpress:
         container_name: wordpress
         build: requirements/wordpress
         env_file:
                 - .env
-        # depends_on:
-        #     - mariadb
+        depends_on:
+            - mariadb
         volumes:
         - wordpress:/var/www/html
         networks:
