@@ -1,4 +1,4 @@
-VOLUMES := ~/Inception/srcs/volumes
+VOLUMES := srcs/volumes
 RED = \033[1;31m
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
