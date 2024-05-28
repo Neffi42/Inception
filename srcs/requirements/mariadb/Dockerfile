@@ -11,4 +11,6 @@ RUN chmod +x /start.sh
 
 EXPOSE 3306
 
+VOLUME [ "/var/lib/mysql" ]
+
 CMD [ "/start.sh" ]
