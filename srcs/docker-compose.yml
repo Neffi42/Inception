@@ -9,6 +9,7 @@ services:
         networks:
             - inception
         restart: unless-stopped
+        init: true
 
     wordpress:
         container_name: wordpress
@@ -22,6 +23,7 @@ services:
         networks:
             - inception
         restart: unless-stopped
+        init: true
 
     nginx:
         container_name: nginx
@@ -37,6 +39,7 @@ services:
         networks:
             - inception
         restart: unless-stopped
+        init: true
 
 networks:
     inception:

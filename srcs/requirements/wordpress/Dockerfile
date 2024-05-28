@@ -19,4 +19,6 @@ RUN mkdir /run/php
 COPY ./tools/start.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start.sh
 
+EXPOSE 9000
+
 CMD [ "/usr/local/bin/start.sh" ]

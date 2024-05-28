@@ -17,4 +17,9 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
        -keyout /etc/nginx/ssl/abasdere.42.fr.key \
        -subj "/C=FR/ST=Paris/L=Paris/O=42 School/OU=abasdere.42.fr/CN=abasdere.42.fr/"
 
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
+EXPOSE 443
+
 CMD [ "nginx", "-g", "daemon off;" ]
