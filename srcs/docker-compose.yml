@@ -43,16 +43,19 @@ services:
 
 networks:
     inception:
+        name: inception-network
         driver: bridge
 
 volumes:
     wordpress:
+        name: wordpress-data
         driver: local
         driver_opts:
             type: 'none'
             o: 'bind'
             device: './volumes/wordpress'
     mariadb:
+        name: mariadb-data
         driver: local
         driver_opts:
             type: 'none'

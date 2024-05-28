@@ -13,7 +13,7 @@ else
         --dbuser=$MYSQL_USER \
         --dbpass=$MYSQL_PASSWORD
     wp core install --allow-root \
-        --url=https://www.$DOMAIN_NAME \
+        --url=https://$DOMAIN_NAME \
         --title=$WP_TITLE \
         --admin_user=$WP_ADMIN_USR \
         --admin_password=$WP_ADMIN_PWD \

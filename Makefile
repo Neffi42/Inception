@@ -13,6 +13,10 @@ ls:
 	@echo "$(YELLOW)██████████████████████ ALL CONTAINERS ███████████████████████$(RESET)"
 	@docker ps -a
 
+ls-network:
+	@echo "$(YELLOW)██████████████████████ INCEPTION-NETWORK ███████████████████████$(RESET)"
+	@docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a
+
 build: volumes
 	@echo "$(BLUE)██████████████████████ Building Images ███████████████████████$(RESET)"
 	docker-compose -f ./srcs/docker-compose.yml build

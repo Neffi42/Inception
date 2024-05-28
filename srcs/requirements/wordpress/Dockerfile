@@ -4,8 +4,7 @@ RUN apt update && apt upgrade -y && apt install -y \
     php7.4 \
     php-fpm \
     php-mysql \
-    wget \
-    sendmail
+    wget
 RUN apt clean
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \

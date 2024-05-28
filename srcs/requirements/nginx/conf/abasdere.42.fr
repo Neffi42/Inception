@@ -1,15 +1,28 @@
 server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
+	listen 443 ssl;
+	listen [::]:443 ssl;
 
-	server_name abasdere.42.fr www.abasdere.42.fr;
+	server_name www.abasdere.42.fr;
 
     ssl_certificate     /etc/nginx/ssl/abasdere.42.fr.crt;
     ssl_certificate_key /etc/nginx/ssl/abasdere.42.fr.key;
-    ssl_protocols       TLSv1.2 TLSv1.3;
+    ssl_protocols       TLSv1.3;
+
+	return 301 $scheme://abasdere.42.fr$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+	server_name abasdere.42.fr;
+
+    ssl_certificate     /etc/nginx/ssl/abasdere.42.fr.crt;
+    ssl_certificate_key /etc/nginx/ssl/abasdere.42.fr.key;
+    ssl_protocols       TLSv1.3;
 
 	root /var/www/html;
-	index index.php index.nginx-debian.html;
+	index index.php;
 
 	location / {
 		try_files $uri $uri/ /index.php$is_args$args;
@@ -17,9 +30,9 @@ server {
 
 	location ~ \.php$ {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		include fastcgi_params;
 		fastcgi_pass wordpress:9000;
 		fastcgi_index index.php;
-		include fastcgi_params;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 		fastcgi_param SCRIPT_NAME $fastcgi_script_name;
 	}
